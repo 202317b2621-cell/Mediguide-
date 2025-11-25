@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediGuide+ (Static Preview)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles to mimic the dark mode and icon fills */
+        body {
+            /* Fallback font to match the typical sans-serif used by Tailwind */
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+        .icon-placeholder {
+            /* Simple placeholder style for Lucide icons */
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            background-color: currentColor;
+            -webkit-mask: no-repeat center / contain;
+            mask: no-repeat center / contain;
+        }
+        .icon-activity { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E"); }
+        .icon-camera { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z'/%3E%3C/svg%3E"); }
+        .icon-mappin { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E"); }
+        .icon-search { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.3-4.3'/%3E%3C/svg%3E"); }
+        .icon-pill { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16z'/%3E%3Cpath d='m10 12 4-4'/%3E%3Cpath d='m8 10 4 4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16z'/%3E%3Cpath d='m10 12 4-4'/%3E%3Cpath d='m8 10 4 4'/%3E%3C/svg%3E"); }
+        .icon-messagecircle { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 20A9 9 0 1 0 4 16.1L2 22z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 20A9 9 0 1 0 4 16.1L2 22z'/%3E%3C/svg%3E"); }
+        .icon-x { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18M6 6l12 12'/%3E%3C/svg%3E"); }
+        .icon-arrowright { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E"); }
+        .icon-chevronright { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E"); }
+        .icon-checkcircle { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpath d='m9 11 3 3L22 4'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpath d='m9 11 3 3L22 4'/%3E%3C/svg%3E"); }
+        .icon-sun { -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E"); }
+    </style>
+</head>
+<body class="antialiased">
+
+<div class="flex h-screen w-full overflow-hidden transition-colors duration-300 bg-slate-50 text-slate-900">
+    
+    <aside class="hidden md:flex w-72 flex-col bg-white border-r border-slate-200 z-20">
+        <div class="p-6 flex items-center gap-3 text-blue-600">
+            <div class="bg-blue-600 text-white p-2 rounded-xl shadow-lg shadow-blue-600/20">
+                <span class="icon-placeholder icon-pill w-6 h-6"></span>
+            </div>
+            <span class="text-xl font-extrabold tracking-tight text-slate-900">MediGuide+</span>
+        </div>
+
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium bg-blue-600 text-white shadow-lg shadow-blue-500/30 translate-x-1">
+                <span class="icon-placeholder icon-activity"></span>
+                <span>Dashboard</span>
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium text-slate-500 hover:bg-slate-100 hover:text-blue-600">
+                <span class="icon-placeholder icon-camera"></span>
+                <span>AI Scanner</span>
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium text-slate-500 hover:bg-slate-100 hover:text-blue-600">
+                <span class="icon-placeholder icon-mappin"></span>
+                <span>Pharmacy Map</span>
+            </button>
+            <button class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl transition-all duration-200 font-medium text-slate-500 hover:bg-slate-100 hover:text-blue-600">
+                <span class="icon-placeholder icon-search"></span>
+                <span>Encyclopedia</span>
+            </button>
+        </nav>
+
+        <div class="p-4">
+             <div class="bg-gradient-to-br from-indigo-600 to-blue-600 rounded-2xl p-4 text-white shadow-xl relative overflow-hidden group cursor-pointer">
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-white/10 rounded-full"></div>
+                <h4 class="font-bold relative z-10">Need Help?</h4>
+                <p class="text-blue-100 text-sm mb-3 relative z-10">Chat with MediBoy AI</p>
+                <button class="w-full bg-white text-blue-600 py-2 rounded-lg text-sm font-bold shadow-sm relative z-10">Start Chat</button>
+             </div>
+             <button class="w-full mt-4 flex items-center justify-center gap-2 py-2 text-slate-400 hover:text-slate-600 text-sm font-medium">
+                <span class="icon-placeholder icon-sun"></span> Light Mode
+             </button>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full relative">
+        <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-200">
+             <div class="flex items-center gap-2">
+                <span class="icon-placeholder icon-pill text-blue-600"></span>
+                <span class="font-bold">MediGuide+</span>
+             </div>
+             <button>Menu</button>
+        </div>
+
+        <div class="flex-1 p-4 md:p-8 overflow-y-auto">
+            <div class="space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Welcome back, User</h2>
+                        <p class="text-slate-500">Here is your health overview today.</p>
+                    </div>
+                    <div class="hidden md:flex gap-3">
+                         <div class="px-4 py-2 bg-red-50 text-red-600 rounded-lg text-sm font-bold flex items-center gap-2">
+                            <span class="icon-placeholder icon-activity w-4 h-4"></span> High Pollen Count
+                         </div>
+                         <div class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg text-sm font-bold flex items-center gap-2">
+                            <span class="icon-placeholder icon-checkcircle w-4 h-4"></span> Meds Taken
+                         </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div 
+                        class="cursor-pointer group p-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl text-white shadow-xl shadow-blue-500/20 transition-transform hover:-translate-y-1"
+                    >
+                        <div class="bg-white/20 w-12 h-12 rounded-xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                            <span class="icon-placeholder icon-camera text-white w-6 h-6"></span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">Identify Pill</h3>
+                        <p class="text-blue-100 text-sm mb-4">Scan medicines to get instant AI details.</p>
+                        <div class="flex items-center gap-2 text-sm font-bold bg-white/10 w-fit px-3 py-1 rounded-lg">
+                            Try Now <span class="icon-placeholder icon-arrowright w-3.5 h-3.5"></span>
+                        </div>
+                    </div>
+
+                    <div 
+                        class="cursor-pointer group p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all"
+                    >
+                         <div class="bg-orange-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-orange-600">
+                            <span class="icon-placeholder icon-mappin w-6 h-6"></span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Find Pharmacy</h3>
+                        <p class="text-slate-500 text-sm">Locate nearest 24/7 stores with stock.</p>
+                    </div>
+
+                    <div 
+                        class="cursor-pointer group p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-all"
+                    >
+                         <div class="bg-emerald-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-emerald-600">
+                            <span class="icon-placeholder icon-messagecircle w-6 h-6"></span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Ask MediBoy</h3>
+                        <p class="text-slate-500 text-sm">Chat with our smart AI assistant.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                        <h3 class="font-bold text-lg mb-4 text-slate-900">Common Seasonal Ailments</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">1</div>
+                                    <span class="font-medium text-slate-700">Seasonal Flu</span>
+                                </div>
+                                <span class="icon-placeholder icon-chevronright w-4 h-4 text-slate-400"></span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">2</div>
+                                    <span class="font-medium text-slate-700">Hay Fever</span>
+                                </div>
+                                <span class="icon-placeholder icon-chevronright w-4 h-4 text-slate-400"></span>
+                            </div>
+                            <div class="flex items-center justify-between p-3 hover:bg-slate-50 rounded-xl transition cursor-pointer">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">3</div>
+                                    <span class="font-medium text-slate-700">Common Cold</span>
+                                </div>
+                                <span class="icon-placeholder icon-chevronright w-4 h-4 text-slate-400"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden">
+                        <h3 class="font-bold text-lg mb-4 text-slate-900 z-10 relative">Nearest Pharmacy</h3>
+                        <div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none bg-[radial-gradient(#4f46e5_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        <div class="flex items-center gap-4 mt-4">
+                            <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center flex-shrink-0">
+                                <span class="icon-placeholder icon-mappin text-red-500 w-6 h-6 animate-bounce"></span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Laurel Medical</h4>
+                                <p class="text-slate-500 text-sm">0.3 miles away • Open now</p>
+                            </div>
+                            <button class="ml-auto bg-slate-900 text-white px-4 py-2 rounded-lg text-sm font-bold">
+                                View
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 right-0 md:bottom-6 md:right-6 z-50 transition-all duration-300 flex flex-col items-end pointer-events-none w-auto">
+            
+            <div class="pointer-events-auto bg-white shadow-2xl rounded-t-2xl md:rounded-2xl border border-slate-100 overflow-hidden flex flex-col transition-all duration-300 origin-bottom-right translate-y-10 opacity-0 h-0 w-0 scale-95">
+            </div>
+
+            <button 
+                class="pointer-events-auto bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-2xl shadow-blue-600/40 transition-transform hover:scale-105 active:scale-95 flex items-center gap-2 group"
+            >
+                <span class="icon-placeholder icon-messagecircle w-6 h-6"></span>
+                <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 font-bold whitespace-nowrap">Chat with MediBoy</span>
+            </button>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>
